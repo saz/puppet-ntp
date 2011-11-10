@@ -9,6 +9,7 @@ restrict -6 ::1
 <% ntp_server.each do |server| -%>
 server <%= server %> iburst
 <% end -%>
+<% else -%>
 server 0.debian.pool.ntp.org iburst dynamic
 server 1.debian.pool.ntp.org iburst dynamic
 server 2.debian.pool.ntp.org iburst dynamic
