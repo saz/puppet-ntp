@@ -5,15 +5,8 @@ restrict -6 default kod nomodify notrap nopeer noquery
 restrict 127.0.0.1 
 restrict -6 ::1
 
-<% if has_variable?('ntp_server') then -%>
-<% ntp_server.each do |server| -%>
+<% server_list.each do |server| -%>
 server <%= server %> iburst
-<% end -%>
-<% else -%>
-server 0.debian.pool.ntp.org iburst dynamic
-server 1.debian.pool.ntp.org iburst dynamic
-server 2.debian.pool.ntp.org iburst dynamic
-server 3.debian.pool.ntp.org iburst dynamic
 <% end -%>
 
 driftfile /var/lib/ntp/drift
