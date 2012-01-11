@@ -1,6 +1,6 @@
 # Class: ntp::client
 #
-# This module manages ntp-client
+# This module manages ntp as client
 #
 # Parameters:
 #   [*server_list*]
@@ -56,13 +56,13 @@
 #     Default: true
 #
 # Actions:
-#   Installs ntp package and configures it to sync to defined servers
+#   Installs ntp package and configures it as ntp client
 #
 # Requires:
 #   Nothing
 #
 # Sample Usage:
-#   class { 'ntp': }
+#   class { 'ntp::client': }
 #
 #
 # [Remember: No empty lines between comments and class definition]

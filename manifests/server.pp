@@ -1,3 +1,75 @@
+# Class: ntp::server
+#
+# This module manages ntp as server
+#
+# Parameters:
+#   [*server_list*]
+#     List of NTP servers to use
+#     Default: [ 
+#       '0.debian.pool.ntp.org',
+#       '1.debian.pool.ntp.org',
+#       '2.debian.pool.ntp.org',
+#       '3.debian.pool.ntp.org',
+#       ],
+#
+#   [*query_networks*]
+#     List of networks which have unlimited access
+#     Default: []
+#
+#   [*ensure*]
+#     Ensure if present or absent.
+#     Default: present
+#
+#   [*autoupgrade*]
+#     Upgrade package automatically, if there is a newer version.
+#     Default: false
+#
+#   [*package*]
+#     Name of the package.
+#     Only set this, if your platform is not supported or you know, what you're doing.
+#     Default: auto-set, platform specific
+#
+#   [*config_file*]
+#     Main configuration file.
+#     Only set this, if your platform is not supported or you know, what you're doing.
+#     Default: auto-set, platform specific
+#
+#   [*config_file_replace*]
+#     Replace configuration file with that one delivered with this module
+#     Default: true
+#
+#   [*service_ensure*]
+#     Ensure if service is running or stopped
+#     Default: running
+#
+#   [*service_name*]
+#     Name of NTP service
+#     Only set this, if your platform is not supported or you know, what you're doing.
+#     Default: auto-set, platform specific
+#
+#   [*service_enable*]
+#     Start service at boot
+#     Default: true
+#
+#   [*service_hasstatus*]
+#     Service has status command
+#     Default: true
+#
+#   [*service_hasrestart*]
+#     Service has restart command
+#     Default: true
+#
+# Actions:
+#   Installs ntp package and configures it as ntp server
+#
+# Requires:
+#   Nothing
+#
+# Sample Usage:
+#   class { 'ntp::server': }
+#
+#
+# [Remember: No empty lines between comments and class definition]
 class ntp::server(
   $server_list = [
     '0.debian.pool.ntp.org',
