@@ -171,7 +171,7 @@ class ntp(
     owner   => 'root',
     group   => 'root',
     mode    => 0644,
-    content => template('ntp/server/ntp.conf.erb'),
+    content => template('ntp/ntp.conf.erb'),
     require => Package[$package],
     notify  => Service[$service_name],
   }
