@@ -4,6 +4,7 @@ class ntp::params {
       $package = 'ntp'
       $config_file = '/etc/ntp.conf'
       $service_name = 'ntp'
+      $driftfile = '/var/lib/ntp/ntp.drift'
     }
     default: {
       fail("Unsupported platform: ${::operatingsystem}")
