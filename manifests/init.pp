@@ -91,7 +91,9 @@
 #   Nothing
 #
 # Sample Usage:
-#   class { 'ntp::server': }
+#   class { 'ntp':
+#     server_enabled = true,
+#   }
 #
 #
 # [Remember: No empty lines between comments and class definition]
