@@ -84,6 +84,14 @@
 #     Service has restart command
 #     Default: true
 #
+#   [*defaults_file*]
+#     Init script configuration file.
+#     Default: auto-set, platform specific
+#
+#   [*ntp_options*]
+#     Options to pass to the ntpd command.
+#     Default: '-u ntp:ntp -p /var/run/ntpd.pid -g'
+#
 # Actions:
 #   Installs ntp package and configures it
 #
@@ -94,7 +102,6 @@
 #   class { 'ntp':
 #     server_enabled = true,
 #   }
-#
 #
 # [Remember: No empty lines between comments and class definition]
 class ntp(
@@ -120,7 +127,9 @@ class ntp(
   $service_name = $ntp::params::service_name,
   $service_enable = true,
   $service_hasstatus = true,
-  $service_hasrestart = true
+  $service_hasrestart = true,
+  $defaults_file = $ntp::params::defaults_file,
+  $ntp_options = '-u ntp:ntp -p /var/run/ntpd.pid -g'
 ) inherits ntp::params {
 
   case $ensure {
@@ -172,8 +181,18 @@ class ntp(
     ensure  => $ensure,
     owner   => 'root',
     group   => 'root',
-    mode    => 0644,
+    mode    => '0644',
     content => template('ntp/ntp.conf.erb'),
+    require => Package[$package],
+    notify  => Service[$service_name],
+  }
+
+  file { $defaults_file:
+    ensure  => $ensure,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('ntp/ntp.defaults.erb'),
     require => Package[$package],
     notify  => Service[$service_name],
   }
