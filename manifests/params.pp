@@ -4,7 +4,7 @@ class ntp::params {
   $config_file = '/etc/ntp.conf'
 
   case $::operatingsystem {
-    /(Ubuntu|Debian)/: {
+    'Ubuntu', 'Debian': {
       $service_name = 'ntp'
       $driftfile = '/var/lib/ntp/ntp.drift'
       $config_file_owner = 'root'
@@ -18,7 +18,7 @@ class ntp::params {
       $config_file_group = 'root'
       $config_file_mode  = '0644'
     }
-    OpenSuSE: {
+    'OpenSuSE': {
       $service_name = 'ntp'
       $driftfile = '/var/lib/ntp/drift/ntp.drift'
       $config_file_owner = 'root'
