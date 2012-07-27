@@ -26,7 +26,7 @@ class ntp::params {
       $config_file_mode  = '0640'
     }
     default: {
-      fail("Unsupported platform: ${::operatingsystem}")
+      fail("Unsupported platform: ${::osfamily}")
     }
   }
 }
