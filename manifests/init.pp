@@ -115,6 +115,9 @@ class ntp(
   $package = $ntp::params::package,
   $config_file = $ntp::params::config_file,
   $config_file_replace = true,
+  $config_file_owner = $ntp::params::config_file_owner,
+  $config_file_group = $ntp::params::config_file_group,
+  $config_file_mode = $ntp::params::config_file_mode,
   $driftfile = $ntp::params::driftfile,
   $service_ensure = 'running',
   $service_name = $ntp::params::service_name,
@@ -170,9 +173,9 @@ class ntp(
 
   file { $config_file:
     ensure  => $ensure,
-    owner   => 'root',
-    group   => 'root',
-    mode    => 0644,
+    owner   => $config_file_owner,
+    group   => $config_file_group,
+    mode    => $config_file_mode,
     content => template('ntp/ntp.conf.erb'),
     require => Package[$package],
     notify  => Service[$service_name],
