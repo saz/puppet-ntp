@@ -3,22 +3,22 @@ class ntp::params {
   $package = 'ntp'
   $config_file = '/etc/ntp.conf'
 
-  case $::operatingsystem {
-    'Ubuntu', 'Debian': {
+  case $::osfamily {
+    'Debian': {
       $service_name = 'ntp'
       $driftfile = '/var/lib/ntp/ntp.drift'
       $config_file_owner = 'root'
       $config_file_group = 'root'
       $config_file_mode  = '0644'
     }
-    'RedHat', 'Fedora', 'CentOS', 'Scientific', 'SLC', 'Ascendos', 'PSBM', 'OracleLinux', 'OVS', 'OEL': {
+    'RedHat': {
       $service_name = 'ntpd'
       $driftfile = '/var/lib/ntp/drift'
       $config_file_owner = 'root'
       $config_file_group = 'root'
       $config_file_mode  = '0644'
     }
-    'OpenSuSE': {
+    'Suse': {
       $service_name = 'ntp'
       $driftfile = '/var/lib/ntp/drift/ntp.drift'
       $config_file_owner = 'root'
