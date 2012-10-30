@@ -5,7 +5,7 @@
 # Parameters:
 #   [*server_list*]
 #     List of NTP servers to use.
-#     Default: [ 
+#     Default: [
 #       '0.pool.ntp.org',
 #       '1.pool.ntp.org',
 #       '2.pool.ntp.org',
@@ -46,12 +46,14 @@
 #
 #   [*package*]
 #     Name of the package.
-#     Only set this, if your platform is not supported or you know, what you're doing.
+#     Only set this, if your platform is not supported or you know,
+#     what you're doing.
 #     Default: auto-set, platform specific
 #
 #   [*config_file*]
 #     Main configuration file.
-#     Only set this, if your platform is not supported or you know, what you're doing.
+#     Only set this, if your platform is not supported or you know,
+#     what you're doing.
 #     Default: auto-set, platform specific
 #
 #   [*config_file_replace*]
@@ -60,7 +62,8 @@
 #
 #   [*driftfile*]
 #     Driftfile to use
-#     Only set this, if your platform is not supported or you know, what you're doing.
+#     Only set this, if your platform is not supported or you know,
+#     what you're doing.
 #     Default: auto-set, platform specific
 #
 #   [*service_ensure*]
@@ -69,7 +72,8 @@
 #
 #   [*service_name*]
 #     Name of NTP service
-#     Only set this, if your platform is not supported or you know, what you're doing.
+#     Only set this, if your platform is not supported or you know,
+#     what you're doing.
 #     Default: auto-set, platform specific
 #
 #   [*service_enable*]
@@ -122,6 +126,9 @@ class ntp(
   $package = $ntp::params::package,
   $config_file = $ntp::params::config_file,
   $config_file_replace = true,
+  $config_file_owner = $ntp::params::config_file_owner,
+  $config_file_group = $ntp::params::config_file_group,
+  $config_file_mode = $ntp::params::config_file_mode,
   $driftfile = $ntp::params::driftfile,
   $service_ensure = 'running',
   $service_name = $ntp::params::service_name,
@@ -179,9 +186,9 @@ class ntp(
 
   file { $config_file:
     ensure  => $ensure,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+    owner   => $config_file_owner,
+    group   => $config_file_group,
+    mode    => $config_file_mode,
     content => template('ntp/ntp.conf.erb'),
     require => Package[$package],
     notify  => Service[$service_name],
