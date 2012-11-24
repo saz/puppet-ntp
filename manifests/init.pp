@@ -92,9 +92,9 @@
 #     Init script configuration file.
 #     Default: auto-set, platform specific
 #
-#   [*ntp_options*]
+#   [*ntpd_start_options*]
 #     Options to pass to the ntpd command.
-#     Default: '-u ntp:ntp -p /var/run/ntpd.pid -g'
+#     Default: auto-set, platform specific
 #
 # Actions:
 #   Installs ntp package and configures it
@@ -136,7 +136,7 @@ class ntp(
   $service_hasstatus = true,
   $service_hasrestart = true,
   $defaults_file = $ntp::params::defaults_file,
-  $ntp_options = '-u ntp:ntp -p /var/run/ntpd.pid -g'
+  $ntpd_start_options = $ntp::params::ntpd_start_options
 ) inherits ntp::params {
 
   case $ensure {
@@ -194,14 +194,16 @@ class ntp(
     notify  => Service[$service_name],
   }
 
-  file { $defaults_file:
-    ensure  => $ensure,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('ntp/ntp.defaults.erb'),
-    require => Package[$package],
-    notify  => Service[$service_name],
+  if $defaults_file {
+   file { $defaults_file:
+     ensure  => $ensure,
+     owner   => 'root',
+     group   => 'root',
+     mode    => '0644',
+     content => template('ntp/ntp.defaults.erb'),
+     require => Package[$package],
+     notify  => Service[$service_name],
+   }
   }
 
   service { $service_name:
