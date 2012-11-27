@@ -3,8 +3,8 @@ class ntp::params {
   $package = 'ntp'
   $config_file = '/etc/ntp.conf'
 
-  case $::osfamily {
-    'Debian': {
+  case $::operatingsystem {
+    'debian', 'ubuntu': {
       $service_name = 'ntp'
       $driftfile = '/var/lib/ntp/ntp.drift'
       $config_file_owner = 'root'
@@ -14,7 +14,7 @@ class ntp::params {
       $defaults_file_tpl = 'ntp.defaults.debian.erb'
       $ntpd_start_options = '-g'
     }
-    'RedHat': {
+    'centos', 'redhat', 'fedora', 'scientific', 'oel': {
       $service_name = 'ntpd'
       $driftfile = '/var/lib/ntp/drift'
       $config_file_owner = 'root'
@@ -24,7 +24,7 @@ class ntp::params {
       $defaults_file_tpl = 'ntp.defaults.redhat.erb'
       $ntpd_start_options = '-u ntp:ntp -p /var/run/ntpd.pid -g'
     }
-    'Suse': {
+    'suse': {
       $service_name = 'ntp'
       $driftfile = '/var/lib/ntp/drift/ntp.drift'
       $config_file_owner = 'root'
@@ -32,7 +32,7 @@ class ntp::params {
       $config_file_mode  = '0640'
     }
     default: {
-      fail("Unsupported platform: ${::osfamily}")
+      fail("Unsupported platform: ${::operatingsystem}")
     }
   }
 }
