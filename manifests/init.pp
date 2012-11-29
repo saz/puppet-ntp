@@ -195,15 +195,15 @@ class ntp(
   }
 
   if $defaults_file {
-   file { $defaults_file:
-     ensure  => $ensure,
-     owner   => 'root',
-     group   => 'root',
-     mode    => '0644',
-     content => template('ntp/ntp.defaults.erb'),
-     require => Package[$package],
-     notify  => Service[$service_name],
-   }
+    file { $defaults_file:
+      ensure  => $ensure,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template("${module_name}/${ntp::params::defaults_file_tpl}"),
+      require => Package[$package],
+      notify  => Service[$service_name],
+    }
   }
 
   service { $service_name:
