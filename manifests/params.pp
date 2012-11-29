@@ -14,7 +14,7 @@ class ntp::params {
       $defaults_file_tpl = 'ntp.defaults.debian.erb'
       $ntpd_start_options = '-g'
     }
-    'centos', 'redhat', 'fedora', 'scientific', 'oel': {
+    'centos', 'redhat', 'fedora', 'scientific', 'oel', 'oraclelinux': {
       $service_name = 'ntpd'
       $driftfile = '/var/lib/ntp/drift'
       $config_file_owner = 'root'
