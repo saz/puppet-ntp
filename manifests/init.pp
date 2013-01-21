@@ -120,7 +120,7 @@ class ntp(
   $interface_ignore = [],
   $interface_listen = [],
   $enable_statistics = false,
-  $statsdir = undef,
+  $statsdir = '',
   $ensure = 'present',
   $autoupgrade = false,
   $package = $ntp::params::package,
