@@ -74,7 +74,12 @@
 #     server_enabled = true,
 #   }
 #
-# [Remember: No empty lines between comments and class definition]
+# Authors:
+#   Mike Arnold <mike@razorsedge.org>
+#
+# Copyright:
+#   Copyright (C) 2012 Mike Arnold, unless otherwise noted.
+#
 class ntp::ntpdate(
   # TODO: get $server_list from Class["ntp"]
   $server_list = [
@@ -93,7 +98,7 @@ class ntp::ntpdate(
   $service_hasstatus = false,
   $service_hasrestart = true,
   $defaults_file = $ntp::params::ntpdate_defaults_file,
-  $ntpdate_options = '-U ntp -s -b',
+  $ntpdate_options = $ntp::params::ntpdate_options,
   $sync_hwclock = false
 ) inherits ntp::params {
 
@@ -123,35 +128,43 @@ class ntp::ntpdate(
     }
   }
 
-  package { $package:
-    ensure => $package_ensure,
+  if $package {
+    package { $package:
+      ensure => $package_ensure,
+    }
   }
 
-  file { $config_file:
-    ensure  => $ensure,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('ntp/step-tickers.erb'),
-    require => Package[$package],
-    notify  => Service[$service_name],
+  if $config_file {
+    file { $config_file:
+      ensure  => $ensure,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template('ntp/step-tickers.erb'),
+      require => Package[$package],
+      notify  => Service[$service_name],
+    }
   }
 
-  file { $defaults_file:
-    ensure  => $ensure,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('ntp/ntpdate.defaults.erb'),
-    require => Package[$package],
-    notify  => Service[$service_name],
+  if $defaults_file {
+    file { $defaults_file:
+      ensure  => $ensure,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template('ntp/ntpdate.defaults.erb'),
+      require => Package[$package],
+      notify  => Service[$service_name],
+    }
   }
 
-  service { $service_name:
-    ensure     => $service_ensure_real,
-    enable     => $service_enable,
-    hasstatus  => $service_hasstatus,
-    hasrestart => $service_hasrestart,
-    status     => '/bin/true',
+  if $service_name {
+    service { $service_name:
+      ensure     => $service_ensure_real,
+      enable     => $service_enable,
+      hasstatus  => $service_hasstatus,
+      hasrestart => $service_hasrestart,
+      status     => '/bin/true',
+    }
   }
 }
