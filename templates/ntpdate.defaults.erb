@@ -1,0 +1,11 @@
+# file is managed by puppet
+
+# Options for ntpdate
+OPTIONS="<%= @ntpdate_options %>"
+
+# Set to 'yes' to sync hw clock after successful ntpdate
+<% if @sync_hwclock -%>
+SYNC_HWCLOCK=yes
+<% else -%>
+SYNC_HWCLOCK=no
+<% end -%>
