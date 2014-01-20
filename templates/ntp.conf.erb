@@ -30,6 +30,10 @@ server <%= server %>
 # By default, exchange time with everybody, but don't allow configuration.
 restrict -4 default kod notrap nomodify nopeer noquery
 restrict -6 default kod notrap nomodify nopeer noquery
+<% else -%>
+# by default act only as a basic NTP client
+restrict -4 default nomodify nopeer noquery notrap
+restrict -6 default nomodify nopeer noquery notrap
 <% end -%>
 
 # Local users may interrogate the ntp server more closely.
