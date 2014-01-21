@@ -33,7 +33,7 @@ class ntp::params {
             $ntpdate_package = 'ntpdate'
             $ntpdate_config_file = '/etc/ntp/step-tickers'
             $ntpdate_defaults_file = '/etc/sysconfig/ntpdate'
-            $ntpdate_service_name = 'ntpddate'
+            $ntpdate_service_name = 'ntpdate'
             $ntpdate_options = '-U ntp -s -b'
           }
         }
@@ -41,7 +41,7 @@ class ntp::params {
           $ntpdate_package = 'ntpdate'
           $ntpdate_config_file = '/etc/ntp/step-tickers'
           $ntpdate_defaults_file = '/etc/sysconfig/ntpdate'
-          $ntpdate_service_name = 'ntpddate'
+          $ntpdate_service_name = 'ntpdate'
           $ntpdate_options = '-U ntp -s -b'
         }
       }
