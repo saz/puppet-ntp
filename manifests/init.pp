@@ -186,9 +186,9 @@ class ntp(
 
   file { $config_file:
     ensure  => $ensure,
-    owner   => $config_file_owner,
-    group   => $config_file_group,
-    mode    => $config_file_mode,
+    owner   => 0,
+    group   => 0,
+    mode    => '0644',
     content => template('ntp/ntp.conf.erb'),
     require => Package[$package],
   }
@@ -196,8 +196,8 @@ class ntp(
   if $defaults_file {
     file { $defaults_file:
       ensure  => $ensure,
-      owner   => 'root',
-      group   => 'root',
+      owner   => 0,
+      group   => 0,
       mode    => '0644',
       content => template("${module_name}/${ntp::params::defaults_file_tpl}"),
       require => Package[$package],
