@@ -204,7 +204,7 @@ class ntp(
     }
   }
 
-  unless $ensure == 'absent' {
+  if $ensure != 'absent' {
     $service_subscribe = $defaults_file ? {
       true    => [ File[$config_file], File[$defaults_file], ],
       default => File[$config_file],
