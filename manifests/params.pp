@@ -18,7 +18,7 @@ class ntp::params {
       $driftfile = '/var/lib/ntp/drift'
       $defaults_file = '/etc/sysconfig/ntpd'
       $defaults_file_tpl = 'ntp.defaults.redhat.erb'
-            case $::operatingsystem {
+      case $::operatingsystem {
         'RedHat', 'CentOS', 'Scientific', 'SLC', 'OracleLinux', 'OVS', 'OEL': {
           $majdistrelease = $::lsbmajdistrelease ? {
             ''      => regsubst($::operatingsystemrelease,'^(\d+)\.(\d+)','\1'),
