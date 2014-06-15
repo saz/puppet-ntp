@@ -18,13 +18,13 @@ class ntp::params {
       $driftfile = '/var/lib/ntp/drift'
       $defaults_file = '/etc/sysconfig/ntpd'
       $defaults_file_tpl = 'ntp.defaults.redhat.erb'
-      $ntpd_start_options = '-u ntp:ntp -p /var/run/ntpd.pid -g'
-      case $::operatingsystem {
+            case $::operatingsystem {
         'RedHat', 'CentOS', 'Scientific', 'SLC', 'OracleLinux', 'OVS', 'OEL': {
           $majdistrelease = $::lsbmajdistrelease ? {
             ''      => regsubst($::operatingsystemrelease,'^(\d+)\.(\d+)','\1'),
             default => $::lsbmajdistrelease,
           }
+          $ntpd_start_options = '-u ntp:ntp -p /var/run/ntpd.pid -g'
           if $majdistrelease >= 6 {
             $ntpdate_package = 'ntpdate'
             $ntpdate_config_file = '/etc/ntp/step-tickers'
@@ -39,6 +39,7 @@ class ntp::params {
           $ntpdate_defaults_file = '/etc/sysconfig/ntpdate'
           $ntpdate_service_name = 'ntpdate'
           $ntpdate_options = '-U ntp -s -b'
+          $ntpd_start_options = '-p /var/run/ntpd.pid -g'
         }
       }
     }
@@ -56,6 +57,12 @@ class ntp::params {
       $defaults_file = '/etc/conf.d/ntpd'
       $defaults_file_tpl = 'ntp.defaults.debian.erb'
       $ntpd_start_options = '-g'
+    }
+    'Archlinux': {
+      $package = 'ntp'
+      $config_file = '/etc/ntp.conf'
+      $service_name = 'ntpd'
+      $driftfile = '/var/lib/ntp/ntp.drift'
     }
     default: {
       fail("Unsupported platform: ${::osfamily}")
