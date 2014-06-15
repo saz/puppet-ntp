@@ -1,8 +1,7 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "rake"
-gem "puppet", ENV['PUPPET_VERSION'] || '~> 3.6.0'
-gem "puppet-lint"
-gem "rspec-puppet"
-gem "puppet-syntax"
-gem "puppetlabs_spec_helper"
+puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>= 3.2']
+
+gem 'puppet-lint'
+gem 'rspec-puppet'
+gem 'puppet', puppetversion
