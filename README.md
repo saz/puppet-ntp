@@ -61,6 +61,7 @@ you can set $query_networks in the follwing way:
 * config_file: string, default: OS specific. Set config_file, if platform is not supported. 
 * config_file_replace: true or false, default: true
 * driftfile: string, default: OS specific. Set driftfile, if platform is not supported. 
+* server_iburst: use iburst as server option
 * service_ensure: running or stopped, default: running
 * service_name: string, default: OS specific. Set service_name, if platform is not supported. 
 * service_enable: true or false, default: true

@@ -23,7 +23,10 @@ filegen clockstats file clockstats type day enable
 <% end -%>
 
 <% @server_list.each do |server| -%>
-server <%= server %>
+server <%= server -%>
+	<% if @server_iburst == true -%>
+		<%--%>iburst<%--%>
+	<% end %>
 <% end -%>
 
 <% if @server_enabled == true -%>

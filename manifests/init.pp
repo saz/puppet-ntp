@@ -116,6 +116,7 @@ class ntp(
     '3.pool.ntp.org',
   ],
   $server_enabled = false,
+  $server_iburst = false,
   $query_networks = [],
   $interface_ignore = [],
   $interface_listen = [],
