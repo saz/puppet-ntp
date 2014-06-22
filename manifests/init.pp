@@ -12,6 +12,10 @@
 #       '3.pool.ntp.org',
 #       ],
 #
+#   [*server_options*]
+#     Pass options to all servers listed in server_list
+#     Default: ''
+#
 #   [*server_enabled*]
 #     Enable ntp server mode.
 #     Default: false
@@ -115,6 +119,7 @@ class ntp(
     '2.pool.ntp.org',
     '3.pool.ntp.org',
   ],
+  $server_options = '',
   $server_enabled = false,
   $query_networks = [],
   $interface_ignore = [],

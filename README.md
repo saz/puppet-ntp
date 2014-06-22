@@ -50,7 +50,28 @@ you can set $query_networks in the follwing way:
     }
 ```
 
+Adding options to all servers in server_list
+
+```puppet
+    class { 'ntp':
+        server_list = ['a.example.com', 'b.example.com'],
+        server_options = 'iburst',
+    }
+```
+
+Adding options to one specific server
+
+```puppet
+    class { 'ntp':
+        server_list = [
+            'a.example.com iburst',
+            'b.example.com',
+        ],
+    }
+```
+
 ## Other class parameters
+* server_options: string, default: ''
 * interface_ignore: array, default: []
 * interface_listen: array, default: []
 * enable_statistics: true or false, default: false
