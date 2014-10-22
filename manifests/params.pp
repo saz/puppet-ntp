@@ -46,7 +46,11 @@ class ntp::params {
     'Suse': {
       $package = 'ntp'
       $config_file = '/etc/ntp.conf'
-      $service_name = 'ntp'
+      if $::operatingsystemrelease == '13.2' {
+        $service_name = 'ntpd'
+      } else {
+        $service_name = 'ntp'
+      }
       $driftfile = '/var/lib/ntp/drift/ntp.drift'
     }
     'Gentoo': {
