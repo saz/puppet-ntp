@@ -48,6 +48,8 @@ class ntp::params {
       $config_file = '/etc/ntp.conf'
       if $::operatingsystemrelease == '13.2' {
         $service_name = 'ntpd'
+      } elsif $::operatingsystem == 'SLES' and $::operatingsystemmajrelease >= '12' {
+        $service_name = 'ntpd'
       } else {
         $service_name = 'ntp'
       }
