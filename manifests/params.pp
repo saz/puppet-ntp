@@ -25,7 +25,7 @@ class ntp::params {
             default => $::lsbmajdistrelease,
           }
           $ntpd_start_options = '-u ntp:ntp -p /var/run/ntpd.pid -g'
-          if $majdistrelease >= 6 {
+          if $majdistrelease >= '6' {
             $ntpdate_package = 'ntpdate'
             $ntpdate_config_file = '/etc/ntp/step-tickers'
             $ntpdate_defaults_file = '/etc/sysconfig/ntpdate'
