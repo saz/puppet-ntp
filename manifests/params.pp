@@ -21,7 +21,7 @@ class ntp::params {
       case $::operatingsystem {
         'RedHat', 'CentOS', 'Scientific', 'SLC', 'OracleLinux', 'OVS', 'OEL': {
           $majdistrelease = $::lsbmajdistrelease ? {
-            ''      => regsubst($::operatingsystemrelease,'^(\d+)\.[\d.]+','\1'),
+            undef   => regsubst($::operatingsystemrelease,'^(\d+)\.[\d.]+','\1'),
             default => $::lsbmajdistrelease,
           }
           $ntpd_start_options = '-u ntp:ntp -p /var/run/ntpd.pid -g'
