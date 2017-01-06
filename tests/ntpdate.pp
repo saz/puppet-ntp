@@ -1,1 +1,1 @@
-include ntp::ntpdate
+include ::ntp::ntpdate

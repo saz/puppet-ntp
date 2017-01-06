@@ -54,10 +54,10 @@
   "version": "2.3.2",
   "author": "saz",
   "summary": "UNKNOWN",
-  "license": "Apache License, Version 2.0",
-  "source": "UNKNOWN",
+  "license": "Apache-2.0",
+  "source": "https://github.com/saz/puppet-ntp.git",
   "project_page": "https://github.com/saz/puppet-ntp",
-  "issues_url": null,
+  "issues_url": "https://github.com/saz/puppet-ntp/issues",
   "description": "Manage NTP via puppet",
   "dependencies": [
   

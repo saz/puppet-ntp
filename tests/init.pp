@@ -1,1 +1,1 @@
-include ntp
+include ::ntp
