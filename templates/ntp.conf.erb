@@ -25,6 +25,9 @@ filegen clockstats file clockstats type day enable
 <% @server_list.each do |server| -%>
 server <%= server %><%- if @server_options -%> <%= @server_options %><%- end %>
 <% end -%>
+<% @pool_list.each do |pool| -%>
+pool <%= pool %><%- if @pool_options -%> <%= @pool_options %><%- end %>
+<% end -%>
 
 <% if @server_enabled == true -%>
 # By default, exchange time with everybody, but don't allow configuration.
