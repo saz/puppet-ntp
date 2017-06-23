@@ -2,6 +2,9 @@
 
 Manage NTP client and server via Puppet
 
+### Supported Puppet versions
+* Puppet >= 3
+
 ## Usage
 
 ### Client
