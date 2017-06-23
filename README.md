@@ -72,6 +72,8 @@ Adding options to one specific server
 
 ## Other class parameters
 * server_options: string, default: ''
+* pool_list: string, default: []
+* pool_options: string, default: ''
 * interface_ignore: array, default: []
 * interface_listen: array, default: []
 * enable_statistics: true or false, default: false
