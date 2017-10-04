@@ -38,6 +38,10 @@ restrict -6 default kod notrap nomodify nopeer noquery
 restrict -4 default nomodify nopeer noquery notrap
 restrict -6 default nomodify nopeer noquery notrap
 <% end -%>
+<% if @pool_list.length >= 1 -%>
+# When using the pool associations and nopeer a restrict source without nopeer should be added. https://www.eecis.udel.edu/~mills/ntp/html/accopt.html#restrict
+restrict source kod notrap nomodify noquery
+<% end -%>
 
 # Local users may interrogate the ntp server more closely.
 restrict 127.0.0.1
