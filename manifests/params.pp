@@ -20,12 +20,8 @@ class ntp::params {
       $defaults_file_tpl = 'ntp.defaults.redhat.erb'
       case $::operatingsystem {
         'RedHat', 'CentOS', 'Scientific', 'SLC', 'OracleLinux', 'OVS', 'OEL': {
-          $majdistrelease = $::lsbmajdistrelease ? {
-            undef   => regsubst($::operatingsystemrelease,'^(\d+)\.[\d.]+','\1'),
-            default => $::lsbmajdistrelease,
-          }
           $ntpd_start_options = '-u ntp:ntp -p /var/run/ntpd.pid -g'
-          if versioncmp($majdistrelease, '6') >= 0 {
+          if versioncmp($::operatingsystemmajrelease, '6') >= 0 {
             $ntpdate_package = 'ntpdate'
             $ntpdate_config_file = '/etc/ntp/step-tickers'
             $ntpdate_defaults_file = '/etc/sysconfig/ntpdate'
@@ -40,6 +36,9 @@ class ntp::params {
           $ntpdate_service_name = 'ntpdate'
           $ntpdate_options = '-U ntp -s -b'
           $ntpd_start_options = '-p /var/run/ntpd.pid -g'
+        }
+        default: {
+          fail("Unsupported platform: ${::osfamily}/${::operatingsystem}")
         }
       }
     }
