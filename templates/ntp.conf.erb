@@ -2,6 +2,10 @@
 
 driftfile <%= @driftfile %>
 
+<% if @disable_monitor then -%>
+disable monitor
+<% end -%>
+
 <% if @interface_ignore.empty? == false then -%>
 <% @interface_ignore.each do |int_ignore| -%>
 interface ignore <%= int_ignore %>
