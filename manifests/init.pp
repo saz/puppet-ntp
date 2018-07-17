@@ -68,6 +68,10 @@
 #     what you're doing.
 #     Default: auto-set, platform specific
 #
+#   [*disable_monitor*]
+#     Disables the monitoring facility
+#     Default: false
+#
 #   [*config_file_replace*]
 #     Replace configuration file with that one delivered with this module
 #     Default: true
@@ -135,6 +139,7 @@ class ntp(
   $interface_ignore = [],
   $interface_listen = [],
   $enable_statistics = false,
+  $disable_monitor   = false,
   $statsdir = '',
   $ensure = 'present',
   $autoupgrade = false,
