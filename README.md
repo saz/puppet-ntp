@@ -1,4 +1,4 @@
-# puppet-ntp
+# puppet-ntp [![Build Status](https://secure.travis-ci.org/saz/puppet-ntp.png)](https://travis-ci.org/saz/puppet-ntp)
 
 Manage NTP client and server via Puppet
 
