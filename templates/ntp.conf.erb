@@ -1,5 +1,8 @@
 # file is managed by puppet
 
+<% if @tinker_panic then -%>
+tinker panic 0
+<% end -%>
 driftfile <%= @driftfile %>
 
 <% if @disable_monitor then -%>

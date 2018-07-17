@@ -48,6 +48,10 @@
 #     Directory to write statistics.
 #     Default: undef
 #
+#   [*tinker_panic*]
+#     Try to get time even with large jumps in time.
+#     Default: false
+#
 #   [*ensure*]
 #     Ensure if present or absent.
 #     Default: present
@@ -125,6 +129,7 @@
 #
 # [Remember: No empty lines between comments and class definition]
 class ntp(
+  $ensure = 'present',
   $server_list = [
     '0.pool.ntp.org',
     '1.pool.ntp.org',
@@ -141,7 +146,7 @@ class ntp(
   $enable_statistics = false,
   $disable_monitor   = false,
   $statsdir = '',
-  $ensure = 'present',
+  $tinker_panic = false,
   $autoupgrade = false,
   $package = $ntp::params::package,
   $config_file = $ntp::params::config_file,

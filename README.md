@@ -75,6 +75,7 @@ Adding options to one specific server
 ```
 
 ## Other class parameters
+* ensure: present or absent, default: present
 * server_options: string, default: ''
 * pool_list: string, default: []
 * pool_options: string, default: ''
@@ -82,7 +83,7 @@ Adding options to one specific server
 * interface_listen: array, default: []
 * enable_statistics: true or false, default: false
 * statsdir: string, default: undef
-* ensure: present or absent, default: present
+* tinker_panic: boolean, default: false
 * autoupgrade: true or false, default: false
 * package: string, default: OS specific. Set package name, if platform is not supported.
 * config_file: string, default: OS specific. Set config_file, if platform is not supported. 
