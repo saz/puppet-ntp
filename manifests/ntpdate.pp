@@ -80,7 +80,7 @@
 # Copyright:
 #   Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
-class ntp::ntpdate(
+class ntp::ntpdate (
   Array                      $server_list        = ['0.pool.ntp.org','1.pool.ntp.org','2.pool.ntp.org','3.pool.ntp.org'],
   Enum['absent', 'present']  $ensure             = 'present',
   Boolean                    $autoupgrade        = false,
@@ -95,7 +95,6 @@ class ntp::ntpdate(
   String                     $ntpdate_options    = $ntp::params::ntpdate_options,
   Boolean                    $sync_hwclock       = false
 ) inherits ntp::params {
-
   case $ensure {
     /(present)/: {
       if $autoupgrade == true {
