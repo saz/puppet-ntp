@@ -128,19 +128,19 @@
 #   }
 #
 # [Remember: No empty lines between comments and class definition]
-class ntp(
+class ntp (
   Enum['absent', 'present']  $ensure              = 'present',
   Array                      $server_list         = ['0.pool.ntp.org','1.pool.ntp.org','2.pool.ntp.org','3.pool.ntp.org'],
-  String                     $server_options      = '',
+  Optional[String]           $server_options      = undef,
   Array                      $pool_list           = [],
-  String                     $pool_options        = '',
+  Optional[String]           $pool_options        = undef,
   Boolean                    $server_enabled      = false,
   Array                      $query_networks      = [],
   Array                      $interface_ignore    = [],
   Array                      $interface_listen    = [],
   Boolean                    $enable_statistics   = false,
   Boolean                    $disable_monitor     = false,
-  String                     $statsdir            = '',
+  Optional[String]           $statsdir            = undef,
   Boolean                    $tinker_panic        = false,
   Boolean                    $autoupgrade         = false,
   String                     $package             = $ntp::params::package,
@@ -155,7 +155,6 @@ class ntp(
   String                     $defaults_file       = $ntp::params::defaults_file,
   String                     $ntpd_start_options  = $ntp::params::ntpd_start_options
 ) inherits ntp::params {
-
   case $ensure {
     /(present)/: {
       if $autoupgrade == true {
@@ -173,8 +172,8 @@ class ntp(
       }
 
       if $server_enabled == false {
-        $interface_ignore_real = [ 'all', ]
-        $interface_listen_real = [ 'lo', ]
+        $interface_ignore_real = ['all']
+        $interface_listen_real = ['lo']
       } elsif $server_enabled == true {
         $interface_ignore_real = $interface_ignore
         $interface_listen_real = $interface_listen
