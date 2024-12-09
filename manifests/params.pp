@@ -45,7 +45,7 @@ class ntp::params {
     'Suse': {
       $package = 'ntp'
       $config_file = '/etc/ntp.conf'
-      if versioncmp($facts['os']['name']release, '13.2') == 0 {
+      if versioncmp($facts['os']['release']['full'], '13.2') == 0 {
         $service_name = 'ntpd'
       } elsif $facts['os']['name'] == 'SLES' and versioncmp($facts['os']['release']['major'], '12') >= 0 {
         $service_name = 'ntpd'
