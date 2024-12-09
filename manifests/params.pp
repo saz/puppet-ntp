@@ -1,7 +1,7 @@
 class ntp::params {
   # Common
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'Debian': {
       $package = 'ntp'
       $config_file = '/etc/ntp.conf'
@@ -18,10 +18,10 @@ class ntp::params {
       $driftfile = '/var/lib/ntp/drift'
       $defaults_file = '/etc/sysconfig/ntpd'
       $defaults_file_tpl = 'ntp.defaults.redhat.erb'
-      case $::operatingsystem {
+      case $facts['os']['name'] {
         'RedHat', 'CentOS', 'Scientific', 'SLC', 'OracleLinux', 'OVS', 'OEL': {
           $ntpd_start_options = '-u ntp:ntp -p /var/run/ntpd.pid -g'
-          if versioncmp($::operatingsystemmajrelease, '6') >= 0 {
+          if versioncmp($facts['os']['release']['major'], '6') >= 0 {
             $ntpdate_package = 'ntpdate'
             $ntpdate_config_file = '/etc/ntp/step-tickers'
             $ntpdate_defaults_file = '/etc/sysconfig/ntpdate'
@@ -38,16 +38,16 @@ class ntp::params {
           $ntpd_start_options = '-p /var/run/ntpd.pid -g'
         }
         default: {
-          fail("Unsupported platform: ${::osfamily}/${::operatingsystem}")
+          fail("Unsupported platform: ${facts['os']['family']}/${facts['os']['name']}")
         }
       }
     }
     'Suse': {
       $package = 'ntp'
       $config_file = '/etc/ntp.conf'
-      if versioncmp($::operatingsystemrelease, '13.2') == 0 {
+      if versioncmp($facts['os']['name']release, '13.2') == 0 {
         $service_name = 'ntpd'
-      } elsif $::operatingsystem == 'SLES' and versioncmp($::operatingsystemmajrelease, '12') >= 0 {
+      } elsif $facts['os']['name'] == 'SLES' and versioncmp($facts['os']['release']['major'], '12') >= 0 {
         $service_name = 'ntpd'
       } else {
         $service_name = 'ntp'
@@ -70,7 +70,7 @@ class ntp::params {
       $driftfile = '/var/lib/ntp/ntp.drift'
     }
     default: {
-      fail("Unsupported platform: ${::osfamily}")
+      fail("Unsupported platform: ${facts['os']['family']}")
     }
   }
 }
