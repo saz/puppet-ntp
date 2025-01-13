@@ -1,0 +1,13 @@
+---
+ntp::package: 'ntp'
+ntp::config_file: '/etc/ntp.conf'
+ntp::service_name: 'ntpd'
+ntp::driftfile: '/var/lib/ntp/drift'
+ntp::defaultsfile: '/etc/sysconfig/ntpd'
+ntp::ntpd_start_options: '-u ntp:ntp -p /var/run/ntpd.pid -g'
+ntp::defaults_file_tpl: 'ntp.defaults.redhat.erb'
+ntp::ntpdate::package: 'ntpdate'
+ntp::ntpdate::config_file: '/etc/ntp/step-tickers'
+ntp::ntpdate::defaults_file: '/etc/sysconfig/ntpdate'
+ntp::ntpdate::service_name: 'ntpdate'
+ntp::ntpdate::ntpdate_options: '-U ntp -s -b'

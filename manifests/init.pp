@@ -129,32 +129,33 @@
 #
 # [Remember: No empty lines between comments and class definition]
 class ntp (
-  Enum['absent', 'present']  $ensure              = 'present',
-  Array                      $server_list         = ['0.pool.ntp.org','1.pool.ntp.org','2.pool.ntp.org','3.pool.ntp.org'],
-  Optional[String]           $server_options      = undef,
-  Array                      $pool_list           = [],
-  Optional[String]           $pool_options        = undef,
-  Boolean                    $server_enabled      = false,
-  Array                      $query_networks      = [],
-  Array                      $interface_ignore    = [],
-  Array                      $interface_listen    = [],
-  Boolean                    $enable_statistics   = false,
-  Boolean                    $disable_monitor     = false,
-  Optional[String]           $statsdir            = undef,
-  Boolean                    $tinker_panic        = false,
-  Boolean                    $autoupgrade         = false,
-  String                     $package             = $ntp::params::package,
-  String                     $config_file         = $ntp::params::config_file,
-  Boolean                    $config_file_replace = true,
-  String                     $driftfile           = $ntp::params::driftfile,
-  Enum['stopped', 'running'] $service_ensure      = 'running',
-  String                     $service_name        = $ntp::params::service_name,
-  Boolean                    $service_enable      = true,
-  Boolean                    $service_hasstatus   = true,
-  Boolean                    $service_hasrestart  = true,
-  String                     $defaults_file       = $ntp::params::defaults_file,
-  String                     $ntpd_start_options  = $ntp::params::ntpd_start_options
-) inherits ntp::params {
+  String $package,
+  String $config_file,
+  String $driftfile,
+  String $service_name,
+  Enum['absent', 'present'] $ensure = 'present',
+  Array $server_list = ['0.pool.ntp.org','1.pool.ntp.org','2.pool.ntp.org','3.pool.ntp.org'],
+  Optional[String] $server_options = undef,
+  Array $pool_list = [],
+  Optional[String] $pool_options = undef,
+  Boolean $server_enabled = false,
+  Array $query_networks = [],
+  Array $interface_ignore = [],
+  Array $interface_listen = [],
+  Boolean $enable_statistics = false,
+  Boolean $disable_monitor = false,
+  Optional[String] $statsdir = undef,
+  Boolean $tinker_panic = false,
+  Boolean $autoupgrade = false,
+  Boolean $config_file_replace = true,
+  Enum['stopped', 'running'] $service_ensure = 'running',
+  Boolean $service_enable = true,
+  Boolean $service_hasstatus = true,
+  Boolean $service_hasrestart = true,
+  Optional[Stdlib::Absolutepath] $defaults_file = undef,
+  Optional[String] $defaults_file_tpl = undef,
+  Optional[String] $ntpd_start_options = undef,
+) {
   case $ensure {
     /(present)/: {
       if $autoupgrade == true {
@@ -215,7 +216,7 @@ class ntp (
       owner   => 0,
       group   => 0,
       mode    => '0644',
-      content => template("${module_name}/${ntp::params::defaults_file_tpl}"),
+      content => template("${module_name}/${defaults_file_tpl}"),
       require => Package[$package],
     }
   }
