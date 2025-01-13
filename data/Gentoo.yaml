@@ -1,0 +1,8 @@
+---
+ntp::package: 'net-misc/ntp'
+ntp::config_file: '/etc/ntp.conf'
+ntp::service_name: 'ntpd'
+ntp::driftfile: '/var/lib/ntp/ntp.drift'
+ntp::defaultsfile: '/etc/conf.d/ntpd'
+ntp::ntpd_start_options: '-g'
+ntp::defaults_file_tpl: 'ntp.defaults.debian.erb'

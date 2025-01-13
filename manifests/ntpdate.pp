@@ -81,20 +81,20 @@
 #   Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
 class ntp::ntpdate (
-  Array                      $server_list        = ['0.pool.ntp.org','1.pool.ntp.org','2.pool.ntp.org','3.pool.ntp.org'],
-  Enum['absent', 'present']  $ensure             = 'present',
-  Boolean                    $autoupgrade        = false,
-  String                     $package            = $ntp::params::ntpdate_package,
-  String                     $config_file        = $ntp::params::ntpdate_config_file,
-  Enum['stopped', 'running'] $service_ensure     = 'running',
-  String                     $service_name       = $ntp::params::ntpdate_service_name,
-  Boolean                    $service_enable     = true,
-  Boolean                    $service_hasstatus  = false,
-  Boolean                    $service_hasrestart = true,
-  String                     $defaults_file      = $ntp::params::ntpdate_defaults_file,
-  String                     $ntpdate_options    = $ntp::params::ntpdate_options,
-  Boolean                    $sync_hwclock       = false
-) inherits ntp::params {
+  String $package,
+  String $config_file,
+  String $service_name,
+  String $defaults_file,
+  String $ntpdate_options,
+  Array $server_list = ['0.pool.ntp.org','1.pool.ntp.org','2.pool.ntp.org','3.pool.ntp.org'],
+  Enum['absent', 'present'] $ensure = 'present',
+  Boolean $autoupgrade = false,
+  Enum['stopped', 'running'] $service_ensure = 'running',
+  Boolean $service_enable = true,
+  Boolean $service_hasstatus = false,
+  Boolean $service_hasrestart = true,
+  Boolean $sync_hwclock = false
+) {
   case $ensure {
     /(present)/: {
       if $autoupgrade == true {

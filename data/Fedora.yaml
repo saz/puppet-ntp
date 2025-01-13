@@ -1,0 +1,2 @@
+---
+ntp::ntpd_start_options: '-p /var/run/ntpd.pid -g'
