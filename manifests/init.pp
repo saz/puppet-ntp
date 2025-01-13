@@ -207,6 +207,7 @@ class ntp (
     group   => 0,
     mode    => '0644',
     content => template('ntp/ntp.conf.erb'),
+    notify  => Service[$service_name],
     require => Package[$package],
   }
 
@@ -217,23 +218,18 @@ class ntp (
       group   => 0,
       mode    => '0644',
       content => template("${module_name}/${defaults_file_tpl}"),
+      notify  => Service[$service_name],
       require => Package[$package],
     }
   }
 
   if $ensure != 'absent' {
-    $service_subscribe = defined(File[$defaults_file]) ? {
-      true    => [File[$config_file], File[$defaults_file]],
-      default => File[$config_file],
-    }
-
     service { $service_name:
       ensure     => $service_ensure_real,
       enable     => $service_enable,
       hasstatus  => $service_hasstatus,
       hasrestart => $service_hasrestart,
       require    => File[$config_file],
-      subscribe  => $service_subscribe,
     }
   }
 }
