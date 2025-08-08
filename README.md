@@ -1,10 +1,6 @@
-# puppet-ntp [![Build Status](https://secure.travis-ci.org/saz/puppet-ntp.png)](https://travis-ci.org/saz/puppet-ntp)
+# puppet-ntp
 
 Manage NTP client and server via Puppet
-
-### Supported Puppet versions
-* Puppet >= 4
-* Last version supporting Puppet 3: v2.5.0
 
 ## Usage
 
@@ -75,6 +71,7 @@ Adding options to one specific server
 ```
 
 ## Other class parameters
+
 * ensure: present or absent, default: present
 * server_options: string, default: ''
 * pool_list: string, default: []
